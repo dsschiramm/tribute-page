@@ -1,0 +1,175 @@
+/* Banner (style1) */
+
+.banner.style1 {
+	@include vendor('align-items', 'stretch');
+	@include vendor('display', 'flex');
+	@include vendor('flex-direction', 'row');
+	@include vendor('justify-content', 'flex-end');
+	position: relative;
+	text-align: left;
+	overflow-x: hidden;
+
+	.content {
+		@include padding(_size(padding, default) * 0.25, _size(padding, default) * 0.25);
+		@include vendor('align-self', 'center');
+		@include vendor('flex-grow', '1');
+		@include vendor('flex-shrink', '1');
+		width: 50%;
+		max-width: (_size(inner) * 0.75);
+		margin: 0 auto;
+	}
+
+	.image {
+		@include vendor('flex-grow', '0');
+		@include vendor('flex-shrink', '0');
+		border-radius: 0;
+		width: 50%;
+
+		img {
+			@include vendor('object-fit', 'cover');
+			@include vendor('object-position', 'center');
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border-radius: 0;
+		}
+	}
+
+	@include breakpoint('<=xlarge') {
+		.content {
+			@include padding(_size(padding, xlarge), _size(padding, xlarge));
+		}
+	}
+
+	@include breakpoint('<=large') {
+		.content {
+			@include padding(_size(padding, large), _size(padding, large));
+		}
+	}
+
+	@include breakpoint('<=medium') {
+		.content {
+			@include padding(_size(padding, medium) * 1.25, _size(padding, medium));
+		}
+	}
+
+	@include breakpoint('<=small') {
+		.content {
+			@include padding(_size(padding, small) * 1.25, _size(padding, small));
+		}
+	}
+
+	@include orientation(portrait) {
+		@include vendor('flex-direction', 'column-reverse');
+		text-align: center;
+
+		.content {
+			@include vendor('display', 'flex');
+			@include vendor('flex-direction', 'column');
+			@include vendor('justify-content', 'center');
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.image {
+			width: 100%;
+			max-width: 100%;
+			height: 45vh;
+		}
+	}
+
+	// Modifiers.
+
+	// Size.
+	&.fullscreen {
+		min-height: 100vh;
+
+		@include orientation(portrait) {
+			.content {
+				min-height: 50vh;
+			}
+
+			.image {
+				height: 50vh;
+			}
+		}
+	}
+
+	// Orientation.
+	&.orient-left {
+		// ...
+	}
+
+	&.orient-right {
+		@include vendor('flex-direction', 'row-reverse');
+
+		@include orientation(portrait) {
+			@include vendor('flex-direction', 'column-reverse');
+		}
+	}
+
+	// Content Alignment.
+	&.content-align-left {
+		// ...
+	}
+
+	&.content-align-center {
+		text-align: center;
+	}
+
+	&.content-align-right {
+		text-align: right;
+
+		@include orientation(portrait) {
+			text-align: center;
+		}
+	}
+
+	// Image Position.
+	&.image-position-left {
+		.image {
+			img {
+				@include vendor('object-position', 'left');
+			}
+		}
+	}
+
+	&.image-position-center {
+		.image {
+			img {
+				// ...
+			}
+		}
+	}
+
+	&.image-position-right {
+		.image {
+			img {
+				@include vendor('object-position', 'right');
+			}
+		}
+	}
+}
+
+// Mixin
+
+@mixin color-banner($p: null) {
+	.banner {
+		.image {
+			background-color: transparentize(_palette($p, fg-bold), 0.875);
+		}
+
+		@if ($p != 'invert') {
+			&.invert {
+				.image {
+					background-color: transparentize(_palette(invert, fg-bold), 0.875);
+				}
+			}
+		}
+	}
+}
+
+@include color-banner;
