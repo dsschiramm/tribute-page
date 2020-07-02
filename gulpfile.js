@@ -74,7 +74,7 @@ function html() {
 }
 
 if (environments.production()) {
-	exports.default = series(clean, images, sass, css, html);
+	exports.default = series(clean, images, sass, css, scripts, html);
 } else {
 	const connect = require('gulp-connect');
 
