@@ -2,4 +2,4 @@
 
 Tribute Page
 
-Page: https://dsschiramm.github.io/survey-form/
+Page: https://dsschiramm.github.io/tribute-page/
